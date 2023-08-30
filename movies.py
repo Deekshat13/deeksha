@@ -7,8 +7,8 @@ movies = [
     {"id": "2", "title": "The ShawShank", "year": "2015", "genre": "Drama", "rating": 8.2},
     {"id": "3", "title": "The Dark Knight", "year": "2018", "genre": "Drama", "rating": 8.5},
     {"id": "4", "title": "Forrest Gump", "year": "2019", "genre": "Sports Drama", "rating": 8.7},
-    {"id": "5", "title": "Forrest Gump", "year": "2019", "genre": "Sports Drama", "rating": 8.7},
-    {"id": "6", "title": "Forrest Gump", "year": "2019", "genre": "Sports Drama", "rating": 8.7},
+    {"id": "5", "title": "Titanic", "year": "2019", "genre": "Sports Drama", "rating": 8.7},
+    {"id": "6", "title": "The Matrix", "year": "2019", "genre": "Sports Drama", "rating": 8.7},
 
 ]
 
