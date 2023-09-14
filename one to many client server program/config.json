@@ -1,6 +1,0 @@
-{
-  "customer1_address" :"127.0.0.1",
-  "customer2_address" :"127.0.0.1",
-  "browser_address" :"127.0.0.1",
-  "port" : 12345
-}
