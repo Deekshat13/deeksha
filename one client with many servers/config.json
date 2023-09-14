@@ -1,0 +1,8 @@
+{
+    "flipkart_ip": "0.0.0.0",
+    "flipkart_port": 5000,
+    "amazon_ip": "0.0.0.0",
+    "amazon_port": 5005
+}
+
+
