@@ -1,0 +1,69 @@
+pipeline {
+
+    agent any
+
+ 
+
+    stages {
+
+        stage('Checkout') {
+
+            steps {
+
+                checkout scm
+
+            }
+
+        }
+
+ 
+
+        stage('Convert XML to JSON') {
+
+            steps {
+
+                script {
+
+                    // Install required Python packages if not already installed
+
+                    sh 'pip install xmltodict'
+
+                    
+
+                    // Run the Python script to convert XML to JSON
+
+                    def xml_file_path = input(
+
+                        message: 'Enter XML file:',
+
+                        parameters: [
+
+                            string(defaultValue: 'input.xml', description: 'XML file path', name: 'xml_file_path')
+
+                        ]
+
+                    )
+
+def json_data = sh(script: "python your_script.py ${xml_file_path}", returnStatus: true)
+
+                    
+
+                    if (json_data == 0) {
+
+                        echo "XML to JSON conversion succeeded."
+
+                    } else {
+
+                        error "XML to JSON conversion failed."
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+}
