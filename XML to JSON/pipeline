@@ -44,7 +44,7 @@ pipeline {
 
                     )
 
-def json_data = sh(script: "python your_script.py ${xml_file_path}", returnStatus: true)
+def json_data = sh(script: "xml_to_json.py ${xml_file_path}", returnStatus: true)
 
                     
 
