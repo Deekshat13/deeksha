@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Execute Statements') {
+            steps {
+                sh 'echo "Jenkins Demo pipeline creation..."'
+            }
+        }
+    }
+
+    post {
+        success {
+            // Send an email on successful build
+            emailext (
+                subject: "Build Successful",
+                body: "The Jenkins build was successful.",
+                to: "tadikamalladeeksha@gmail.com.com"
+            )
+        }
+        failure {
+        // Send an email on build failure
+            emailext (
+                subject: "Build Failed",
+                body: "The Jenkins build Failed.",
+                to: "tadikamalladeeksha@gmail.com"
+            )
+       } 
+    }
+}
+
+
+
+
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                sh 'echo "Building.."'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'echo "Testing.."'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'echo "Deploying.."'
+            }
+        }
+    }
+}  
