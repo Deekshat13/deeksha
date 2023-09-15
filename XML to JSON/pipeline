@@ -7,8 +7,8 @@ pipeline {
                 script {
                     def xmlFilePath = input(message: 'Enter XML file path:', parameters: [string(defaultValue: '', description: 'XML File Path', name: 'xml_file_path')])
                     try {
-                        def command = "python xml_to_json.py" // Replace with the actual script file name
-                        def cmd = bat(script: "${command} ${xmlFilePath}", returnStatus: true)
+                        def command = "python your_script.py" // Replace with the actual script file name
+                        def cmd = sh(script: "${command} ${xmlFilePath}", returnStatus: true)
                         if (cmd != 0) {
                             error "Failed to convert XML to JSON."
                         }
@@ -20,3 +20,4 @@ pipeline {
         }
     }
 }
+
