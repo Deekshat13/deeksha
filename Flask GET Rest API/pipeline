@@ -10,7 +10,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh "python3 -m venv $VENV_DIR"
-                sh "$VENV_DIR/bin/pip install flask"
+                sh "$VENV_DIR/bin/sudo apt install python3-ven"
             }
         }
         
