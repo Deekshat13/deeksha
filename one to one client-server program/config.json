@@ -1,0 +1,5 @@
+{
+  "customer_address" :"127.0.0.1",
+  "flipkart_address" :"127.0.0.1",
+  "port" : 12345
+}

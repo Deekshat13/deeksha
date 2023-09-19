@@ -1,0 +1,12 @@
+# Use an official Python runtime as a parent image
+FROM python:3.8-slim
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
+COPY flipkart.py /app
+COPY config.json /app
+
+# Define the command to run your application
+CMD ["python", "flipkart.py"]  # Replace "your_program.py" with the actual entry point of your client-server program
