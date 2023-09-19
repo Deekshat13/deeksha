@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+    
+    environment {
+        VENV_DIR = 'venv'
+    }
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout your code repository here
+                // For example: git 'https://github.com/your/repo.git'
+            }
+        }
+        
+        stage('Install Dependencies') {
+            steps {
+                sh "python3 -m venv $VENV_DIR"
+                sh "$VENV_DIR/bin/pip install flask"
+            }
+        }
+        
+        stage('Run Flask App') {
+            steps {
+                sh "$VENV_DIR/bin/python get_api.py &"
+                sleep 10 // Give the Flask app time to start
+            }
+        }
+        
+    }
+    
+    post {
+        always {
+            // Clean up (e.g., stop Flask app, deactivate virtual environment)
+            sh "killall python3 || true"
+            sh "rm -rf $VENV_DIR"
+        }
+    }
+}
