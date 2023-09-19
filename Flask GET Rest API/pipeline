@@ -6,12 +6,6 @@ pipeline {
     }
     
     stages {
-        stage('Checkout') {
-            steps {
-                // Checkout your code repository here
-                // For example: git 'https://github.com/your/repo.git'
-            }
-        }
         
         stage('Install Dependencies') {
             steps {
