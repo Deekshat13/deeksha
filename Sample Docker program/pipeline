@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Execute Python Script') {
+            steps {
+                script {
+                    // Define the Python executable and script file
+                    def pythonExecutable = 'python3'  // Use the correct Python executable path
+                    def scriptPath = 'test.py'  // Update with the correct path to your Python script
+
+                    // Run the Python script
+                    def command = "${pythonExecutable} ${scriptPath}"
+                    def output = sh(script: command, returnStdout: true).trim()
+
+                    echo "Python Script Output: ${output}"
+                }
+            }
+        }
+    }
+}
