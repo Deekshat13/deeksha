@@ -1,11 +1,48 @@
-pipeline {
+pipeline{
+
     agent any
-    
+
+   // environment {
+       // DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+    //}
+
     stages {
-        stage('Execute Flask App') {
+        stage('gitclone') {
+
             steps {
-                sh 'python3 get_api.py'
+                checkout([$class: 'GitSCM', branches: [[name: 'Exercise-1']], userRemoteConfigs: [[url: 'https://github.com/Deekshat13/deeksha.git']]])
             }
         }
+
+       stage('Build') {
+    steps {
+        sh 'pwd'
+        sh 'ls'
+        sh 'cd "Flask GET Rest API" && ls'
+        sh 'docker build -t flask -f Dockerfile .'
     }
+}
+
+ 
+
+        /*stage('Login') {
+
+            steps {
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $$DOCKERHUB_CREDENTIALS_USR --passsword-stdin'
+            }
+        }
+        stage('Push') {
+
+            steps {
+                sh 'docker push sainadh01/flaskapp_test:latest'
+            }
+        }*/
+    }
+
+    /*post {
+        always {
+            sh 'docker logout'
+        }
+    }*/
+
 }
