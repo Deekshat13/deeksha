@@ -8,8 +8,8 @@ RUN apt-get update && apt-get install -y openssh-client
 WORKDIR /pyats
 
 # Copy the Python script to the container
-COPY sample_pyats.py /pyats/
+COPY interface.py /pyats/
 COPY my_testbed.yaml /pyats/
 
 # Run the Python script when the container launches
-ENTRYPOINT ["python", "/pyats/sample_pyats.py"]
+ENTRYPOINT ["python", "/pyats/interface.py"]
