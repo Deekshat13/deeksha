@@ -1,0 +1,14 @@
+devices:
+  Cat8000V:
+    connections:
+      cli:
+        ip: 131.226.217.143
+        protocol: ssh
+    credentials:
+      default:
+        password: C1sco12345
+        username: admin
+      enable:
+        password: '%ASK{}'
+    os: iosxe
+    type: iosxe
