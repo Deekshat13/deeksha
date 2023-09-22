@@ -22,11 +22,6 @@ class MyTestcase(aetest.Testcase):
         else:
             self.failed(f"Device is not reachable.")
 
-    # Get device information
-    @aetest.test
-    def get_device_info(self):
-        output = self.device.execute('show version')
-        self.passed(f"Device Info:\n{output}")
 
     # Disconnect from the device
     @aetest.cleanup
