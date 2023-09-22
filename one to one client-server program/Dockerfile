@@ -9,4 +9,4 @@ COPY flipkart.py /app
 COPY config.json /app
 
 # Define the command to run your application
-CMD ["python", "flipkart.py"]  # Replace "your_program.py" with the actual entry point of your client-server program
+CMD ["python", "flipkart.py"]  
