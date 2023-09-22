@@ -6,10 +6,10 @@ class CheckAndEnableInterface(aetest.Testcase):
 
     @aetest.setup
     def setup(self):
-        # Load the testbed file (update 'my_yaml2.yaml' with your testbed file)
+        # Load the testbed file 
         self.tb = loader.load('my_testbed.yaml')
-        self.device = self.tb.devices['Cat8000V']  # Replace with your device name
-        self.interface_name = 'GigabitEthernet3'  # Replace with the interface name to check
+        self.device = self.tb.devices['Cat8000V']  
+        self.interface_name = 'GigabitEthernet3'  
 
         # Connect to the device
         self.device.connect()
