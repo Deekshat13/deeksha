@@ -6,7 +6,7 @@ WORKDIR /app
 
 
 # Copy the current directory contents into the container at /app
-COPY movies.py /app
+COPY get_api.py /app
 
 # Install Flask
 RUN pip install flask
