@@ -1,5 +1,10 @@
 pipeline {
     agent any
+    environment {
+        EC2_HOST = '51.20.89.145'
+        EC2_USER = 'ec2-user'
+        PRIVATE_KEY_CREDENTIAL_ID = 'pemkey' // Replace with the actual credential ID
+    }
     stages {
         stage('Build') {
             steps {
@@ -15,17 +20,22 @@ pipeline {
                     sh "docker login -u deekshatadikamalla@gmail.com -p 'Deeksha@2000>>'"
                     sh 'docker tag flask deekshat13/tdeeksha:flask'
                     sh "docker push deekshat13/tdeeksha:flask"
-                }
-            }
-        stage('Deploy') {
-            steps {
-                script {
-                    // Assuming SSH key authentication is set up
-                    sh 'ssh user@192.168.1.161 "docker pull deekshat13/tdeeksha:flask"'
-                    sh 'ssh user@192.168.1.161 "docker run -d -p 80:80 --name flask-container deekshat13/tdeeksha:flask"'
-                }
             }
         }
 
+        stage('Pull Docker Image on EC2') {
+            steps {
+                script {
+                    // Use the credentials binding to retrieve the private key file path
+                    withCredentials([file(credentialsId: PRIVATE_KEY_CREDENTIAL_ID, variable: 'PRIVATE_KEY_PATH')]) {
+                        sh """
+                            ssh -i $PRIVATE_KEY_PATH -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $EC2_USER@$EC2_HOST << EOF
+                            docker pull deekshat13/tdeeksha:flask
+                            EOF
+                        """
+                    }
+                }
+            }
         }
+    }
 }
