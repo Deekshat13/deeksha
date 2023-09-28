@@ -28,7 +28,9 @@ pipeline {
                     withCredentials([file(credentialsId: 'pemkey2', variable: 'PRIVATE_KEY_FILE')]) {
                         sh """
                             chmod 400 \$PRIVATE_KEY_FILE
-                            ssh -v -i \$PRIVATE_KEY_FILE -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \$EC2_USER@\$EC2_HOST "docker pull deekshat13/tdeeksha:flask"
+                            ssh -v -i \$PRIVATE_KEY_FILE -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \$EC2_USER@\$EC2_HOST<< EOF
+                            docker login -u deekshatadikamalla@gmail.com -p 'Deeksha@2000>>'
+                            docker push deekshat13/tdeeksha:flask
                         """
                     }
                 }
