@@ -5,8 +5,7 @@ FROM python:3.8-slim
 WORKDIR /testwork
 
 # Copy the Python script to the container
-COPY calculator.py /testwork/
+COPY desc.py /testwork/
 
 # Run the Python script when the container launches
-CMD ["python", "/testwork/calculator.py"]
-                                        
+CMD ["python", "/testwork/desc.py"]
