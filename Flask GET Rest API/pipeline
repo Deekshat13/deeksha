@@ -17,5 +17,15 @@ pipeline {
                     sh "docker push deekshat13/tdeeksha:flask"
                 }
             }
+        stage('Deploy') {
+            steps {
+                script {
+                    // Assuming SSH key authentication is set up
+                    sh 'ssh user@192.168.1.161 "docker pull deekshat13/tdeeksha:flask"'
+                    sh 'ssh user@192.168.1.161 "docker run -d -p 80:80 --name flask-container deekshat13/tdeeksha:flask"'
+                }
+            }
+        }
+
         }
 }
