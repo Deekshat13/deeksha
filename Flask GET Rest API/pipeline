@@ -27,8 +27,7 @@ pipeline {
                 script {
                     withCredentials([file(credentialsId: 'pemkey2', variable: 'PRIVATE_KEY_FILE')]) {
                         sh """
-                            //ssh  -i \${PRIVATE_KEY_FILE} \${EC2_USER}@\${EC2_HOST} "docker pull deekshat13/tdeeksha:flask"
-                                ssh -i $PRIVATE_KEY_FILE -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $ec2User@$ec2Host << EOF
+                            ssh -i \$PRIVATE_KEY_FILE -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \$EC2_USER@\$EC2_HOST "docker pull deekshat13/tdeeksha:flask"
                         """
                     }
                 }
@@ -36,3 +35,4 @@ pipeline {
         }
     }
 }
+
