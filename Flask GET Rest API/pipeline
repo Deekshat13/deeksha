@@ -6,7 +6,7 @@ pipeline {
     }
     stages {
         stage('Build') {
-            steps {
+            /*steps {
                 dir('Flask GET Rest API') {
                     sh 'ls'
                     sh 'docker build -t flask -f Dockerfile .'
@@ -20,7 +20,7 @@ pipeline {
                 sh 'docker tag flask deekshat13/tdeeksha:flask'
                 sh "docker push deekshat13/tdeeksha:flask"
             }
-        }
+        }*/
 
         stage('Pull Docker Image on EC2') {
             steps {
