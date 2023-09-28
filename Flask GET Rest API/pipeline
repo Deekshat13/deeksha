@@ -4,7 +4,7 @@ pipeline {
         EC2_HOST = '51.20.78.38'
         EC2_USER = 'ubuntu'
     }
-    stages {
+    /*stages {
         stage('Build') {
             steps {
                 dir('Flask GET Rest API') {
@@ -20,7 +20,7 @@ pipeline {
                 sh 'docker tag flask deekshat13/tdeeksha:flask'
                 sh "docker push deekshat13/tdeeksha:flask"
             }
-        }
+        }*/
 
         stage('Pull Docker Image on EC2') {
             steps {
