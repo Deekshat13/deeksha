@@ -5,8 +5,8 @@ pipeline {
         EC2_USER = 'ubuntu'
     }
     stages {
-        stage('Build') {
-            /*steps {
+        /*stage('Build') {
+            steps {
                 dir('Flask GET Rest API') {
                     sh 'ls'
                     sh 'docker build -t flask -f Dockerfile .'
