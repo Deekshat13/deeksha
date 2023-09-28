@@ -27,6 +27,7 @@ pipeline {
                 withCredentials([file(credentialsId: 'pemkey1', variable: 'PRIVATE_KEY_PATH')]) {
                     script {
                         sh """
+                            ls
                             ssh -i $PRIVATE_KEY_PATH -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $EC2_USER@$EC2_HOST << EOF
                             docker pull deekshat13/tdeeksha:flask
                             EOF
