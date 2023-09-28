@@ -35,6 +35,7 @@ pipeline {
                         EOF
                     """*/
                         sh "ssh -i $PRIVATE_KEY_CONTENT ubuntu@51.20.86.171"
+                        sh "docker login -u deekshatadikamalla@gmail.com -p 'Deeksha@2000>>'"
                         sh "docker pull deekshat13/tdeeksha:flask"
                 }
             }
