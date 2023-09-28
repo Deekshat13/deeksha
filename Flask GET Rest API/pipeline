@@ -27,10 +27,7 @@ pipeline {
                 script {
                     withCredentials([file(credentialsId: 'pemkey2', variable: 'PRIVATE_KEY_FILE')]) {
                         sh """
-                            echo "Debug: Checking if private key file exists at \${PRIVATE_KEY_FILE}"
-                            ls -l \${PRIVATE_KEY_FILE}
-                            echo "Debug: Attempting SSH to \${EC2_HOST}..."
-                            ssh -v -i \${PRIVATE_KEY_FILE} \${EC2_USER}@\${EC2_HOST} "docker pull deekshat13/tdeeksha:flask"
+                            ssh  -i \${PRIVATE_KEY_FILE} \${EC2_USER}@\${EC2_HOST} "docker pull deekshat13/tdeeksha:flask"
                         """
                     }
                 }
