@@ -17,9 +17,9 @@ pipeline {
 
         stage('Push to Docker Hub') {
             steps {
-                    sh "docker login -u deekshatadikamalla@gmail.com -p 'Deeksha@2000>>'"
-                    sh 'docker tag flask deekshat13/tdeeksha:flask'
-                    sh "docker push deekshat13/tdeeksha:flask"
+                sh "docker login -u deekshatadikamalla@gmail.com -p 'Deeksha@2000>>'"
+                sh 'docker tag flask deekshat13/tdeeksha:flask'
+                sh "docker push deekshat13/tdeeksha:flask"
             }
         }
 
