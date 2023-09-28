@@ -1,9 +1,8 @@
 pipeline {
     agent any
     environment {
-        //EC2_HOST = '51.20.63.23'
-        //EC2_USER = 'ec2-user'
-        PRIVATE_KEY_CONTENT = credentials('pemkey2') // Replace 'pemkey1' with your actual credential ID
+        EC2_HOST = '51.20.86.171'
+        EC2_USER = 'ubuntu'
     }
     stages {
         stage('Build') {
@@ -26,20 +25,13 @@ pipeline {
         stage('Pull Docker Image on EC2') {
             steps {
                 script {
-                    // Use the private key content directly for SSH
-                    /*sh """
-                        echo '$PRIVATE_KEY_CONTENT' > /tmp/private-key.pem
-                        chmod 600 /tmp/private-key.pem
-                        ssh -i /tmp/private-key.pem -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $EC2_USER@$EC2_HOST << EOF
-                        docker pull deekshat13/tdeeksha:flask
-                        EOF
-                    """*/
-                        sh "ssh -i $PRIVATE_KEY_CONTENT ubuntu@51.20.86.171"
-                        sh "docker login -u deekshatadikamalla@gmail.com -p 'Deeksha@2000>>'"
-                        sh "docker pull deekshat13/tdeeksha:flask"
+                    withCredentials([file(credentialsId: 'pemkey2', variable: 'PRIVATE_KEY_FILE')]) {
+                        sh """
+                            ssh -i \${PRIVATE_KEY_FILE} \${EC2_USER}@\${EC2_HOST} "docker pull deekshat13/tdeeksha:flask"
+                        """
+                    }
                 }
             }
         }
     }
 }
-
