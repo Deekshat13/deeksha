@@ -3,7 +3,7 @@ pipeline {
     environment {
         EC2_HOST = '51.20.89.145'
         EC2_USER = 'ec2-user'
-        PRIVATE_KEY_CREDENTIAL_ID = 'pemkey' // Replace with the actual credential ID
+        PRIVATE_KEY_CREDENTIAL_ID = 'pemkey1' // Replace with the actual credential ID
     }
     stages {
         stage('Build') {
