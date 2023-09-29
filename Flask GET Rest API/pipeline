@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        EC2_HOST = '13.48.84.136'
+        EC2_HOST = '13.49.65.83'
         EC2_USER = 'ubuntu'
     }
     stages {
