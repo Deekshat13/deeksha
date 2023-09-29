@@ -33,7 +33,7 @@ pipeline {
 
                             sudo docker login -u deekshatadikamalla@gmail.com -p 'Deeksha@2000>>'
                             sudo docker pull deekshat13/tdeeksha:flask
-                            docker run -d -p 5000:5000 --name flask-app deekshat13/tdeeksha:flask
+                            sudo docker run -d -p 5000:5000 --name flask-app deekshat13/tdeeksha:flask
                             EOF
                         """
                     }
