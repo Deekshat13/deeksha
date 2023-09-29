@@ -28,12 +28,12 @@ pipeline {
                     withCredentials([file(credentialsId: 'pemkey2', variable: 'PRIVATE_KEY_FILE')]) {
                         sh """
                             chmod 400 \$PRIVATE_KEY_FILE
-                            ssh -i \$PRIVATE_KEY_FILE -o -T StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \$EC2_USER@\$EC2_HOST<< EOF
+                            ssh -i \$PRIVATE_KEY_FILE -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \$EC2_USER@\$EC2_HOST<< EOF
                             //ssh -i your-ssh-key.pem -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@your-ec2-host 'sudo docker pull your-image:tag'
 
                             sudo docker login -u deekshatadikamalla@gmail.com -p 'Deeksha@2000>>'
                             sudo docker pull deekshat13/tdeeksha:flask
-                            sudo docker run -it -p 5000:5000 --name flask-app deekshat13/tdeeksha:flask
+                            sudo docker run -d -p 5000:5000 --name flask-app deekshat13/tdeeksha:flask
                         """
                     }
                 }
