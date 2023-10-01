@@ -13,11 +13,9 @@ pipeline {
             }
         }
 
- 
-
         stage('Push to Docker Hub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: DOCKER_REGISTRY_CREDENTIALS, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'Dockerhubcred', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                     sh """
                     docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
                     docker tag test deekshat13/tdeeksha:test
@@ -27,13 +25,11 @@ pipeline {
             }
         }
 
- 
-
         stage('Deploy to EC2') {
             steps {
                 script {
-                    def ec2Host = '13.48.135.165'  
-                    def ec2User = 'ubuntu'  
+                    def ec2Host = '13.48.135.165'
+                    def ec2User = 'ubuntu'
                     withCredentials([file(credentialsId: 'pemkey', variable: 'PRIVATE_KEY_FILE')]) {
                         sh """
                         chmod 400 $PRIVATE_KEY_FILE
