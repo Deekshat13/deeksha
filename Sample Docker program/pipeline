@@ -25,23 +25,6 @@ pipeline {
             }
         }
 
-        /*stage('Deploy to EC2') {
-            steps {
-                script {
-                    def ec2Host = '13.48.135.165'
-                    def ec2User = 'ubuntu'
-                    withCredentials([file(credentialsId: 'pemkey', variable: 'PRIVATE_KEY_FILE')]) {
-                        sh """
-                        chmod 400 $PRIVATE_KEY_FILE
-                        ssh -i $PRIVATE_KEY_FILE -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $ec2User@$ec2Host << 'EOF'
-                        sh "sudo docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
-                        sudo docker pull pbhuvana16/pbhuvana16:restapi
-                        sudo docker run -d -p 5000:5000 pbhuvana16/pbhuvana16:restapi
-                        EOF
-                        """
-                    }
-                }
-            }
-        }*/
+       
     }
 }
