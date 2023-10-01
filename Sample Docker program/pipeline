@@ -13,22 +13,22 @@ pipeline {
             }
         }
 
-        steps {
-    withCredentials([usernamePassword(credentialsId: 'Dockerhubcred', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-        script {
-            def dockerUsername = env.DOCKER_USERNAME
-            def dockerPassword = env.DOCKER_PASSWORD
+        stage('Push to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'Dockerhubcred', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    script {
+                        def dockerUsername = env.DOCKER_USERNAME
+                        def dockerPassword = env.DOCKER_PASSWORD
 
-            sh '''
-            docker login -u "$dockerUsername" -p "$dockerPassword"
-            docker tag test deekshat13/tdeeksha:test
-            docker push deekshat13/tdeeksha:test
-            '''
+                        sh '''
+                        docker login -u "$dockerUsername" -p "$dockerPassword"
+                        docker tag test deekshat13/tdeeksha:test
+                        docker push deekshat13/tdeeksha:test
+                        '''
+                    }
+                }
+            }
         }
     }
 }
 
-
-       
-    }
-}
