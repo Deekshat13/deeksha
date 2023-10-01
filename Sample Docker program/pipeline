@@ -1,19 +1,49 @@
 pipeline {
     agent any
-
+    environment {
+        DOCKER_REGISTRY_CREDENTIALS = credentials('Dockerhubcred') 
+    }
     stages {
-        stage('Execute Python Script') {
+        stage('Build') {
+            steps {
+                dir('Sample Docker program') {
+                    sh 'ls'
+                    sh 'docker build -t test -f Dockerfile .'
+                }
+            }
+        }
+
+ 
+
+        stage('Push to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: DOCKER_REGISTRY_CREDENTIALS, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    sh """
+                    docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+                    docker tag test deekshat13/tdeeksha:test
+                    docker push deekshat13/tdeeksha:test
+                    """
+                }
+            }
+        }
+
+ 
+
+        stage('Deploy to EC2') {
             steps {
                 script {
-                    // Define the Python executable and script file
-                    def pythonExecutable = 'python3'  // Use the correct Python executable path
-                    def scriptPath = 'test.py'  // Update with the correct path to your Python script
-
-                    // Run the Python script
-                    def command = "${pythonExecutable} ${scriptPath}"
-                    def output = sh(script: command, returnStdout: true).trim()
-
-                    echo "Python Script Output: ${output}"
+                    def ec2Host = '13.48.135.165'  
+                    def ec2User = 'ubuntu'  
+                    withCredentials([file(credentialsId: 'pemkey', variable: 'PRIVATE_KEY_FILE')]) {
+                        sh """
+                        chmod 400 $PRIVATE_KEY_FILE
+                        ssh -i $PRIVATE_KEY_FILE -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $ec2User@$ec2Host << 'EOF'
+                        sh "sudo docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+                        sudo docker pull pbhuvana16/pbhuvana16:restapi
+                        sudo docker run -d -p 5000:5000 pbhuvana16/pbhuvana16:restapi
+                        EOF
+                        """
+                    }
                 }
             }
         }
