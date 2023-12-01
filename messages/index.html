@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Message Dashboard</title>
+    <style>
+        .scrolling-box {
+            height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin-bottom: 15px;
+        }
+        .message {
+            padding: 5px;
+            margin: 3px;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .message:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Message Dashboard</h1>
+
+    <h2>Summary</h2>
+    <p>Total Unique Sources: {{ summary['Total Unique Sources'] }}</p>
+    <p>Total Unique Messages: {{ summary['Total Unique Messages'] }}</p>
+    <p>Total Messages: {{ summary['Total Messages'] }}</p>
+
+    <h2>Detailed Report</h2>
+    <table border="1">
+        <tr>
+            <th>id</th>
+            <th>Source</th>
+            <th>Message</th>
+            <th>Time</th>
+        </tr>
+        {% for row in summary['Detailed Report'] %}
+        <tr>
+            <td>{{ row['id'] }}</td>
+            <td>{{ row['source'] }}</td>
+            <td>{{ row['message'] }}</td>
+            <td>{{ row['time'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Unique Messages</h2>
+    <div class="scrolling-box">
+        {% for message in summary['Message Font Sizes'] %}
+        <p class="message" style="font-size: {{ summary['Message Font Sizes'][message] }}">{{ message }}</p>
+        {% endfor %}
+    </div>
+
+    <h2>Unique Senders</h2>
+    <div class="scrolling-box">
+        {% for sender in summary['Sender Font Sizes'] %}
+        <p class="message" style="font-size: {{ summary['Sender Font Sizes'][sender] }}">{{ sender }}</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
